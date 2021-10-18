@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meudeployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: meupod
+  template:
+    metadata:
+      labels:
+        name: meupod
+    spec:
+      containers:
+        - name: webapi
+          image: fabricioveronez/metricas-api:v1
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
